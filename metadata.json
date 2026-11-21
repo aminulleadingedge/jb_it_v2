@@ -1,0 +1,8 @@
+{
+  "name": "VoltGrid: IPS, Battery, Office & IT Solutions",
+  "description": "IPS & battery backup, office printers & toners, server racks, ATM & CCTV setup, IT hardware, and network & software solutions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
