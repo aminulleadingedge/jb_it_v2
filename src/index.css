@@ -139,6 +139,26 @@
   background: rgba(0, 0, 0, 0.35);
 }
 
+.products-filter-bar {
+  position: sticky;
+  top: calc(94 * var(--n));
+  z-index: 40;
+}
+
+.products-category-scroll {
+  scrollbar-width: none;
+}
+
+.products-category-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 819px) {
+  .products-filter-bar {
+    top: 64px;
+  }
+}
+
 /* ==================== INTRO OVERLAY ==================== */
 #intro {
   position: fixed;
