@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useRef } from 'react';
+import { Facebook } from 'lucide-react';
 import { COMPANY_BRAND } from './data';
 
 export type NavSectionId = 'flavors' | 'products' | 'solutions' | 'about';
@@ -77,7 +78,9 @@ export function NavBar({
         <img
           src={COMPANY_BRAND.logoUrl}
           alt={`${COMPANY_BRAND.banglaName} ${COMPANY_BRAND.name} — ${COMPANY_BRAND.tagline}`}
-          className="h-8 md:h-9 w-auto object-contain block"
+          width={65}
+          height={36}
+          className="h-8 md:h-9 w-auto aspect-[553/306] object-contain block"
           referrerPolicy="no-referrer"
         />
       </a>
@@ -111,6 +114,17 @@ export function NavBar({
       </nav>
 
       <div className="nav-right">
+        <a
+          href={COMPANY_BRAND.facebookUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="nav-fb"
+          aria-label={`${COMPANY_BRAND.name} Facebook Page`}
+          title="Visit JB IT on Facebook"
+        >
+          <Facebook size={18} fill="currentColor" strokeWidth={0} />
+        </a>
+
         <button
           type="button"
           className="nav-dibs"

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowDownRight } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 import { FLAVOURS, type Flavour } from './data';
 import { getProductCutoutDataUrl } from './hardwareArtwork';
 import { hexToRgba } from './math';
@@ -159,13 +159,14 @@ export function ShopSection({
               <button
                 type="button"
                 className="card-add"
-                aria-label={`Request quote for ${flav.name}`}
+                aria-label={`Chat on WhatsApp for ${flav.name}`}
+                title={`Chat on WhatsApp for ${flav.name}`}
                 onClick={(e) => {
                   e.stopPropagation();
                   onRequestQuoteFor(flav);
                 }}
               >
-                <ArrowDownRight size={18} strokeWidth={2.3} aria-hidden="true" />
+                <WhatsAppIcon size={20} aria-hidden="true" />
               </button>
             </div>
           );

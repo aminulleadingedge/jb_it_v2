@@ -518,7 +518,6 @@ export default function App() {
         if (frontLayerRef.current) {
           const isVis = insideRect.bottom > 0 && insideRect.top < vh;
           frontLayerRef.current.style.visibility = isVis ? 'visible' : 'hidden';
-          frontLayerRef.current.style.transform = `translate3d(0px, ${pinY.toFixed(1)}px, 0px)`;
         }
       }
 
@@ -546,12 +545,13 @@ export default function App() {
         if (cardEl) {
           const cr = cardEl.getBoundingClientRect();
           const sr = cardsRef.current.getBoundingClientRect();
-          const targetScroll =
-            cardsRef.current.scrollLeft + (cr.left - sr.left) - (sr.width - cr.width) * 0.5;
-          cardsRef.current.scrollTo({
-            left: Math.max(0, targetScroll),
-            behavior: 'auto',
-          });
+          const diff = (cr.left - sr.left) - (sr.width - cr.width) * 0.5;
+          if (Math.abs(diff) > 30) {
+            cardsRef.current.scrollTo({
+              left: Math.max(0, cardsRef.current.scrollLeft + diff),
+              behavior: 'smooth',
+            });
+          }
         }
       }
       if (p3 === 0) {

@@ -38,7 +38,7 @@
   --dark: #191a1e;
   --flav: #c99364;
   --ease: cubic-bezier(0.22, 0.8, 0.24, 1);
-  --u: min(calc(100vw / 1440), calc(100vh / 900));
+  --u: min(calc(100vw / 1440), calc(100svh / 900));
   --w: calc(100vw / 1440);
   --n: min(calc(100vw / 1440), 1px);
 }
@@ -56,6 +56,7 @@
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    scrollbar-gutter: stable;
   }
 
   body {
@@ -416,6 +417,33 @@ html.swgl .intro-skip {
   flex-shrink: 0;
 }
 
+.nav-fb {
+  height: calc(37 * var(--n));
+  min-height: 32px;
+  width: calc(37 * var(--n));
+  min-width: 32px;
+  border-radius: 999px;
+  border: 0;
+  background: #1877f2;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s var(--ease), opacity 0.2s var(--ease), box-shadow 0.2s var(--ease);
+  box-shadow: 0 2px 8px rgba(24, 119, 242, 0.28);
+  flex-shrink: 0;
+}
+
+.nav-fb:hover {
+  transform: translateY(-1px) scale(1.05);
+  box-shadow: 0 4px 12px rgba(24, 119, 242, 0.36);
+}
+
+.nav-fb:active {
+  transform: scale(0.95);
+}
+
 .nav-chip {
   height: calc(37 * var(--n));
   min-height: 32px;
@@ -532,8 +560,9 @@ html.swgl .intro-skip {
 /* ==================== SECTION 1: HERO ==================== */
 #flavors {
   position: relative;
-  height: 100svh;
-  min-height: 300px;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 100svh;
   overflow: hidden;
   background: var(--flav);
 }
@@ -666,6 +695,7 @@ html.swgl .intro-skip {
   text-align: center;
   white-space: nowrap;
   pointer-events: none;
+  transition: font-size 0.25s ease-out;
 }
 
 #title .word {
@@ -775,7 +805,8 @@ html.swgl .intro-skip {
 /* ==================== SECTION 2: PRODUCT DETAILS BESIDE 3D CUTOUT ==================== */
 #inside {
   position: relative;
-  height: 100svh;
+  height: 100vh;
+  height: 100dvh;
   min-height: 680px;
   background: var(--flav);
 }
@@ -783,7 +814,9 @@ html.swgl .intro-skip {
 .pin {
   position: sticky;
   top: 0;
-  height: 100svh;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 100svh;
   overflow: hidden;
 }
 
@@ -818,15 +851,13 @@ html.swgl .intro-skip {
 }
 
 #inFront {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100svh;
-  z-index: 3;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
   pointer-events: none;
   overflow: hidden;
-  visibility: hidden;
 }
 
 .in-details {
@@ -1122,18 +1153,21 @@ html.swgl .intro-skip {
   height: max(34px, calc(44 * var(--w)));
   border-radius: 999px;
   border: 2px solid #fff;
-  background: var(--ink);
+  background: #25d366;
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   transform: translateZ(40px);
   cursor: pointer;
-  transition: transform 0.2s var(--ease);
+  transition: transform 0.2s var(--ease), background 0.2s var(--ease), box-shadow 0.2s var(--ease);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22);
 }
 
 .card-add:hover {
   transform: translateZ(40px) scale(1.1);
+  background: #20ba5a;
+  box-shadow: 0 6px 16px rgba(37, 211, 102, 0.45);
 }
 
 /* ==================== SECTION 4: BUILDER ==================== */
@@ -1417,7 +1451,7 @@ html.swgl .intro-skip {
 /* ==================== PHONE & TABLET (< 820px) ==================== */
 @media (max-width: 819px) {
   :root {
-    --u: min(calc(100vw / 560), calc(100vh / 980));
+    --u: min(calc(100vw / 560), calc(100dvh / 980));
   }
 
   .nav {
@@ -1472,6 +1506,13 @@ html.swgl .intro-skip {
     height: 36px;
   }
 
+  .nav-fb {
+    height: 36px;
+    width: 36px;
+    min-width: 36px;
+    min-height: 36px;
+  }
+
   .nav-dibs {
     height: 36px;
     padding: 0 15px;
@@ -1513,30 +1554,18 @@ html.swgl .intro-skip {
 
   #title {
     top: auto;
-    bottom: calc(94px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(122px + env(safe-area-inset-bottom, 0px));
     white-space: normal;
     width: calc(100vw - 32px);
     line-height: 0.92;
   }
 
   #play {
-    top: calc(40% + 288 * var(--u));
-    bottom: auto;
-    transform: translate(-50%, -50%);
-    width: 48px;
-    height: 48px;
-  }
-
-  #play:hover {
-    transform: translate(-50%, -50%) scale(1.08);
-  }
-
-  #play:active {
-    transform: translate(-50%, -50%) scale(0.94);
+    display: none !important;
   }
 
   #heroScrollDown {
-    bottom: calc(56px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(82px + env(safe-area-inset-bottom, 0px));
     padding: 4px 12px;
     font-size: 9.5px;
     letter-spacing: 0.1em;
@@ -1780,20 +1809,6 @@ html.swgl .intro-skip {
 
   .nav-off {
     display: none;
-  }
-
-  #title {
-    top: auto;
-    bottom: 12px;
-    font-size: 36px !important;
-  }
-
-  #play {
-    top: calc(50% + 78px);
-    bottom: auto;
-    width: 44px;
-    height: 44px;
-    transform: translate(-50%, -50%);
   }
 
   #count {

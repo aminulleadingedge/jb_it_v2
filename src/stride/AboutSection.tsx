@@ -103,20 +103,22 @@ export function AboutSection({ sectionRef, reducedMotion }: AboutSectionProps) {
               {ABOUT_CONTENT.mottoParagraph}
             </p>
 
-            {/* Smooth Kinetic Transition Text Statement */}
+            {/* Smooth Kinetic Transition Text Statement (stable min-height prevents 3.8s periodic CLS) */}
             <div
-              className="rounded-2xl bg-white/75 border border-black/10 p-6 min-h-[120px] flex flex-col justify-between gap-4"
+              className="rounded-2xl bg-white/75 border border-black/10 p-6 min-h-[155px] sm:min-h-[135px] md:min-h-[125px] flex flex-col justify-between gap-4"
               aria-live="polite"
             >
-              <p
-                key={phraseIndex}
-                className="text-base sm:text-lg font-semibold text-[#1c1a1f] transition-all duration-500"
-                style={{
-                  animation: reducedMotion ? 'none' : 'aboutFadeSlide 480ms cubic-bezier(0.22, 0.8, 0.24, 1)',
-                }}
-              >
-                {ABOUT_CONTENT.transitionPhrases[phraseIndex]}
-              </p>
+              <div className="min-h-[64px] sm:min-h-[56px] flex items-center">
+                <p
+                  key={phraseIndex}
+                  className="text-base sm:text-lg font-semibold text-[#1c1a1f] transition-all duration-500"
+                  style={{
+                    animation: reducedMotion ? 'none' : 'aboutFadeSlide 480ms cubic-bezier(0.22, 0.8, 0.24, 1)',
+                  }}
+                >
+                  {ABOUT_CONTENT.transitionPhrases[phraseIndex]}
+                </p>
+              </div>
 
               <div className="flex items-center gap-2" role="group" aria-label="Company highlight statements">
                 {ABOUT_CONTENT.transitionPhrases.map((_, idx) => (

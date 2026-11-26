@@ -62,6 +62,19 @@ export function buildProductCutoutCanvas(
   wCtx.drawImage(img, 0, 0, S, S);
   const imgData = wCtx.getImageData(0, 0, S, S);
   const data = imgData.data;
+  for (let alphaIndex = 3; alphaIndex < data.length; alphaIndex += 4) {
+    if (data[alphaIndex] < 255) {
+      wCtx.clearRect(0, 0, S, S);
+      const nw = img.naturalWidth || img.width || S;
+      const nh = img.naturalHeight || img.height || S;
+      const scale = Math.min(S / nw, S / nh);
+      const dw = nw * scale;
+      const dh = nh * scale;
+      wCtx.drawImage(img, (S - dw) * 0.5, (S - dh) * 0.5, dw, dh);
+      cutoutCanvasCache.set(assetKey, work);
+      return work;
+    }
+  }
 
   // Sample neutral studio wall tone at top-center
   let bgR = 0;

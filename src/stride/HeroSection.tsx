@@ -41,6 +41,54 @@ function buildTitleFragment(text: string): DocumentFragment {
   return frag;
 }
 
+/**
+ * Custom smooth scroll with increased duration and cinematic easing
+ * so the user can distinctly experience the 3D canvas hardware transition.
+ */
+function smoothScrollToElement(el: HTMLElement, duration = 1350, reducedMotion = false) {
+  if (reducedMotion) {
+    el.scrollIntoView({ behavior: 'auto', block: 'start' });
+    return;
+  }
+
+  const startY = window.scrollY;
+  const targetY = Math.round(el.getBoundingClientRect().top + window.scrollY);
+  const distance = targetY - startY;
+  if (Math.abs(distance) < 2) return;
+
+  const startTime = performance.now();
+
+  // Luxurious easeInOutCubic: smooth ease-in, prolonged graceful glide, soft settle
+  const ease = (t: number) =>
+    t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+  let animId: number;
+
+  const cancel = () => {
+    cancelAnimationFrame(animId);
+    window.removeEventListener('wheel', cancel);
+    window.removeEventListener('touchstart', cancel);
+  };
+
+  const step = (now: number) => {
+    const elapsed = now - startTime;
+    const progress = Math.min(1, elapsed / duration);
+    const easedProgress = ease(progress);
+    window.scrollTo(0, Math.round(startY + distance * easedProgress));
+
+    if (progress < 1) {
+      animId = requestAnimationFrame(step);
+    } else {
+      window.removeEventListener('wheel', cancel);
+      window.removeEventListener('touchstart', cancel);
+    }
+  };
+
+  window.addEventListener('wheel', cancel, { passive: true, once: true });
+  window.addEventListener('touchstart', cancel, { passive: true, once: true });
+  animId = requestAnimationFrame(step);
+}
+
 export function HeroSection({
   entered,
   activeFlavour,
@@ -273,10 +321,7 @@ export function HeroSection({
         onClick={() => {
           const el = document.getElementById('inside');
           if (el) {
-            el.scrollIntoView({
-              behavior: reducedMotion ? 'auto' : 'smooth',
-              block: 'start',
-            });
+            smoothScrollToElement(el, 1350, reducedMotion);
           }
         }}
         aria-label="Scroll to product specifications"

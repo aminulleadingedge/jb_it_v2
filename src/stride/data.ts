@@ -54,6 +54,7 @@ export const COMPANY_BRAND = {
   whatsappPhone: '8801712273333',
   displayPhone: '+880 1712-273333',
   displayPhoneAlt: '+880 1961-400415',
+  facebookUrl: 'https://www.facebook.com/people/JB-IT/61571665919795/',
   email: 'jbitdhaka@gmail.com',
   emailAlt: 'rupdasfp@gmail.com',
   location: 'Rahmania Int\'l Complex (Ground Floor), 28/1/C Toyenbee Circular Road, Motijheel C/A, Dhaka-1000',
@@ -69,12 +70,12 @@ export function buildWhatsAppUrl(productName: string, customNote?: string): stri
 
 export const BAR_ASPECT_H = 1.72;
 
-export const IMG_IPS_BATTERY = '/src/assets/images/product_ips_battery_cutout.png';
-export const IMG_OFFICE_PRINTER = '/src/assets/images/product_office_printer_cutout.png';
-export const IMG_NETWORK_RACK = '/src/assets/images/product_network_rack_cutout.png';
-export const IMG_IT_ACCESSORIES = '/src/assets/images/product_it_accessories_cutout.png';
-export const IMG_CCTV_KIT = '/src/assets/images/product_cctv_kit_cutout.png';
-export const IMG_BUSINESS_LAPTOP = '/src/assets/images/product_business_laptop_1794939453030.jpg';
+export const IMG_IPS_BATTERY = '/src/assets/images/home_ips.webp';
+export const IMG_OFFICE_PRINTER = '/src/assets/images/home_office_printer_.webp';
+export const IMG_NETWORK_RACK = '/src/assets/images/home_router.webp';
+export const IMG_IT_ACCESSORIES = '/src/assets/images/home_it_accessories.webp';
+export const IMG_CCTV_KIT = '/src/assets/images/home_cctv_kit.webp';
+export const IMG_BUSINESS_LAPTOP = '/src/assets/products/product_business_laptop.jpg';
 
 export const FLAVOURS: Flavour[] = [
   {
